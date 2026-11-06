@@ -293,3 +293,166 @@ footer {
     gap: 15px;
   }
 }
+/* =========================
+   ELSEWHERE — THE BREACH
+========================= */
+
+.breach {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #020106;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.3);
+  transition:
+    opacity 1s ease,
+    transform 1.5s cubic-bezier(.16,1,.3,1),
+    visibility 1s;
+}
+
+.breach.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.breach-noise {
+  position: absolute;
+  inset: -50%;
+  background:
+    radial-gradient(ellipse at 50% 50%, #37205c 0%, transparent 35%),
+    radial-gradient(ellipse at 20% 80%, #102b4d 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 20%, #441b4e 0%, transparent 40%);
+  filter: blur(35px);
+  animation: breachSpace 7s ease-in-out infinite alternate;
+}
+
+.breach-ring {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #c5aaff;
+  border-radius: 50%;
+  box-shadow: 0 0 50px #9a5cff;
+  opacity: 0;
+  transform: scale(.1);
+  transition: all 2s cubic-bezier(.1,.8,.2,1);
+}
+
+.breach.active .breach-ring {
+  opacity: .8;
+  transform: scale(35);
+}
+
+.breach-flash {
+  position: absolute;
+  inset: 0;
+  background: white;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.breach-intro {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  opacity: 0;
+  transform: scale(2.5);
+  filter: blur(25px);
+  transition: all 1.5s cubic-bezier(.16,1,.3,1);
+}
+
+.breach.revealed .breach-intro {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+
+.breach-small,
+.breach-sub {
+  font-family: monospace;
+  font-size: 9px;
+  letter-spacing: .45em;
+  color: #b7a9d6;
+}
+
+.breach-name {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(55px, 13vw, 150px);
+  font-weight: 800;
+  letter-spacing: -.09em;
+  color: white;
+  text-shadow:
+    0 0 15px #c4a0ff,
+    0 0 60px #864cff,
+    0 0 130px #5420bd;
+  animation: nameGlitch 3s infinite;
+  margin: 20px 0;
+}
+
+.breach-sub {
+  color: #a99ac9;
+}
+
+.breach-message {
+  position: absolute;
+  bottom: 16%;
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: .4em;
+  color: white;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.breach.complete .breach-message {
+  opacity: .7;
+}
+
+.breach-exit {
+  position: absolute;
+  bottom: 35px;
+  z-index: 5;
+  padding: 15px 20px;
+  background: transparent;
+  border: 1px solid #66517e;
+  color: white;
+  font-family: monospace;
+  font-size: 9px;
+  letter-spacing: .15em;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.breach.complete .breach-exit {
+  opacity: 1;
+}
+
+@keyframes breachSpace {
+  from {
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    transform: scale(1.8) rotate(25deg);
+  }
+}
+
+@keyframes nameGlitch {
+  0%, 90%, 100% {
+    transform: translate(0);
+  }
+  92% {
+    transform: translate(-4px, 2px);
+  }
+  94% {
+    transform: translate(4px, -2px);
+  }
+  96% {
+    transform: translate(-2px, 0);
+  }
+}
